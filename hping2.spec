@@ -15,7 +15,6 @@ Source:		http://www.kyuzz.org/antirez/hping-src/%{name}.0.0-%{beta}.tar.bz2
 Patch0: hping2.endianamd64.patch
 Patch1:	hping2.0.0-rc3-hz-250.patch
 URL:		http://www.kyuzz.org/antirez/hping.html
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 hping is a command-line oriented TCP/IP packet assembler/analyzer. The 
