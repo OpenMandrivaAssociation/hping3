@@ -1,7 +1,7 @@
 %define name		hping2
 %define version		2.0.0
 %define beta		rc3
-%define rel %mkrel 3
+%define rel %mkrel 4
 %define release		0.%{beta}.%rel
 %define summary		TCP/IP packet assembler/analyzer
 
