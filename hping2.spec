@@ -1,53 +1,47 @@
-%define name		hping2
-%define version		2.0.0
-%define beta		rc3
-%define rel %mkrel 5
-%define release		0.%{beta}.%rel
-%define summary		TCP/IP packet assembler/analyzer
+%define beta rc3
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Summary:	%{summary}
+Summary:	TCP/IP packet assembler/analyzer
+Name:		hping2
+Version:	2.0.0
+Release:	%mkrel 0.%{beta}.6
 License:	GPL
 Group:		Monitoring
-Source:		http://www.kyuzz.org/antirez/hping-src/%{name}.0.0-%{beta}.tar.bz2
-Patch0: hping2.endianamd64.patch
-Patch1:	hping2.0.0-rc3-hz-250.patch
-URL:		http://www.kyuzz.org/antirez/hping.html
-BuildRoot:	%{_tmppath}/%{name}-buildroot
+URL:		http://www.hping.org/
+Source0:	http://www.hping.org/hping%{version}-%{beta}.tar.gz
+Patch0:		hping2.endianamd64.patch
+Patch1:		hping2.0.0-rc3-hz-250.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-hping is a command-line oriented TCP/IP packet assembler/analyzer. The 
-interface is very similar to the ping(8) unix command, with many
-extensions. It supports TCP, UDP, ICMP and RAW-IP protocols. A scripting
-language is under developing.
+hping is a command-line oriented TCP/IP packet assembler/analyzer. The
+interface is very similar to the ping(8) unix command, with many extensions.
+It supports TCP, UDP, ICMP and RAW-IP protocols. A scripting language is under
+developing.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
 
 %setup -q -n %{name}-%{beta}
 %patch0 -p0 -b .endianamd64
 %patch1 -p1 -b .hz250
 
 %build
-%configure
-%make
+%configure2_5x
+%make CCOPT="%{optflags}"
 
 %install
-install -d 755 $RPM_BUILD_ROOT%{_sbindir}
-install -d 755 $RPM_BUILD_ROOT%{_mandir}/man8
-install -m 755 hping2 $RPM_BUILD_ROOT%{_sbindir}
-install -m 644 docs/hping2.8 $RPM_BUILD_ROOT%{_mandir}/man8
-cd $RPM_BUILD_ROOT%{_sbindir} && ln -s hping2 hping
+rm -rf %{buildroot}
+
+install -d 755 %{buildroot}%{_sbindir}
+install -d 755 %{buildroot}%{_mandir}/man8
+install -m 755 hping2 %{buildroot}%{_sbindir}
+install -m 644 docs/hping2.8 %{buildroot}%{_mandir}/man8
+cd %{buildroot}%{_sbindir} && ln -s hping2 hping
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc BUGS CHANGES COPYING INSTALL KNOWN-BUGS TODO
 %{_sbindir}/*
 %{_mandir}/man8/hping2.8.*
-
-
