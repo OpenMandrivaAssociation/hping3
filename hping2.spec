@@ -3,13 +3,14 @@
 Summary:	TCP/IP packet assembler/analyzer
 Name:		hping2
 Version:	2.0.0
-Release:	%mkrel 0.%{beta}.6
+Release:	%mkrel 0.%{beta}.7
 License:	GPL
 Group:		Monitoring
 URL:		http://www.hping.org/
 Source0:	http://www.hping.org/hping%{version}-%{beta}.tar.gz
 Patch0:		hping2.endianamd64.patch
 Patch1:		hping2.0.0-rc3-hz-250.patch
+Patch2:		hping2-LDFLAGS.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -23,10 +24,11 @@ developing.
 %setup -q -n %{name}-%{beta}
 %patch0 -p0 -b .endianamd64
 %patch1 -p1 -b .hz250
+%patch2 -p0 -b .LDFLAGS
 
 %build
 %configure2_5x
-%make CCOPT="%{optflags}"
+%make CCOPT="%{optflags}" LDFLAGS="%{ldflags}"
 
 %install
 rm -rf %{buildroot}
