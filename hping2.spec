@@ -3,7 +3,7 @@
 Summary:	TCP/IP packet assembler/analyzer
 Name:		hping2
 Version:	2.0.0
-Release:	%mkrel 0.%{beta}.11
+Release:	%mkrel 0.%{beta}.12
 License:	GPL
 Group:		Monitoring
 URL:		http://www.hping.org/
