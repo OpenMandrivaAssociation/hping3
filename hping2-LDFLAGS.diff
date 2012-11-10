@@ -1,0 +1,19 @@
+--- Makefile.in	2004-05-03 11:29:39.000000000 +0200
++++ Makefile.in.oden	2008-12-20 21:15:14.000000000 +0100
+@@ -16,6 +16,7 @@
+ COMPILE_TIME= @FORCE_LIBPCAP@
+ INSTALL_MANPATH=@MANPATH@
+ @PCAP@
++LDFLAGS=
+ 
+ OBJ=	main.o getifname.o getlhs.o \
+ 	linux_sockpacket.o parseoptions.o datafiller.o \
+@@ -43,7 +44,7 @@
+ 	$(RANLIB) $@
+ 
+ hping2: byteorder.h $(OBJ)
+-	$(CC) -o hping2 $(CCOPT) $(DEBUG) $(OBJ) $(PCAP) @SOLARISLIB@
++	$(CC) -o hping2 $(CCOPT) $(LDFLAGS) $(DEBUG) $(OBJ) $(PCAP) @SOLARISLIB@
+ 	@echo
+ 	./hping2 -v
+ 	@echo "use \`make strip' to strip hping2 binary"
