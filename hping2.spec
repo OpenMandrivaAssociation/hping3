@@ -20,7 +20,7 @@ developing.
 
 %prep
 %setup -qn %{name}-%{beta}
-%apply_patches
+%autopatch -p1
 
 %build
 %configure2_5x
