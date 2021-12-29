@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=hping3
+Comment=Run hping3 in konsole
+Exec=hping3
+Icon=hping3.png
+Terminal=false
+Type=Application
+Categories=Network;
