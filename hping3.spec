@@ -9,20 +9,23 @@ Group:		Monitoring
 Url:		http://www.hping.org/
 Source0:	http://www.hping.org/%{name}-%{version}-alpha-%{alpha}.tar.xz
 Source1:	hping3.desktop
-Patch0:	fix-include-paths-and-linking.patch
+Patch0:		fix-include-paths-and-linking.patch
+Patch1:		configure-fix-tcl-detection.patch
 BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	pkgconfig(tcl)
+BuildRequires:	imagemagick
+BuildRequires:	tcl
+
 
 %description
 hping is a command-line oriented TCP/IP packet assembler/analyzer. The
 interface is very similar to the ping(8) unix command, with many extensions.
 It supports TCP, UDP, ICMP and RAW-IP protocols. A scripting language is under
-developing.
+development.
 
 %prep
 %setup -qn %{name}-%{version}-alpha-%{alpha}
 %autopatch -p1
-cp %{SOURCE1} %{_builddir}
 
 %build
 %configure
@@ -48,8 +51,10 @@ install -m 644 img/hping_big.png %{buildroot}/%{_iconsdir}/hicolor/384x212/apps/
 install -d 755 %{buildroot}/%{_iconsdir}/hicolor/16x16/apps
 install -m 644 img/hping_icon.png %{buildroot}/%{_iconsdir}/hicolor/16x16/apps/hping3_icon.png
 install -d 755 %{buildroot}/%{_datadir}/applications
-install -m 644 %{_builddir}/hping3.desktop %{buildroot}/%{_datadir}/applications/
-
+install -m 644 %{SOURCE1} %{buildroot}/%{_datadir}/applications/
+install -d 755 %{buildroot}/usr/lib/hping3/regtest
+install -m 644 lib/*.htcl %{buildroot}/usr/lib/hping3
+install -m 644 lib/regtest/*.htcl %{buildroot}/usr/lib/hping3/regtest
 cd %{buildroot}%{_sbindir} && ln -s %{name} hping
 
 %files
@@ -62,4 +67,5 @@ cd %{buildroot}%{_sbindir} && ln -s %{name} hping
 %{_iconsdir}/favicons/*.ico
 %{_iconsdir}/hicolor/16x16/apps/hping3_icon.png
 %{_iconsdir}/hicolor/384x212/apps/hping3_big.png
-
+/usr/lib/hping3/*.htcl
+/usr/lib/hping3/regtest/*.htcl
