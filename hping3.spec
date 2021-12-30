@@ -10,8 +10,7 @@ Url:		http://www.hping.org/
 Source0:	http://www.hping.org/%{name}-%{version}-alpha-%{alpha}.tar.xz
 Source1:	hping3.desktop
 Patch0:	fix-include-paths-and-linking.patch
-#Patch1:		hping2.0.0-rc3-hz-250.patch
-#Patch2:		hping2-LDFLAGS.diff
+BuildRequires:	pkgconfig(libpcap)
 
 %description
 hping is a command-line oriented TCP/IP packet assembler/analyzer. The
