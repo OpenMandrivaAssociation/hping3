@@ -6,7 +6,7 @@ Version:	3.0.0
 Release:	0.%{alpha}.1
 License:	GPLv2
 Group:		Monitoring
-Url:		http://www.hping.org/
+Url:		https://www.hping.org/
 Source0:	http://www.hping.org/%{name}-%{version}-alpha-%{alpha}.tar.xz
 Source1:	hping3.desktop
 Patch0:		fix-include-paths-and-linking.patch
