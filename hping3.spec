@@ -3,7 +3,7 @@
 Summary:	TCP/IP packet assembler/analyzer
 Name:		hping3
 Version:	3.0.0
-Release:	0.%{alpha}.1
+Release:	
 License:	GPLv2
 Group:		Monitoring
 Url:		https://www.hping.org/
